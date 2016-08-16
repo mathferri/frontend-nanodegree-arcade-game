@@ -1,4 +1,11 @@
+var Game = function() {
+    this.gameOver = false;
+};
+
+
+
 // Enemies our player must avoid
+
 var Enemy = function(x,y,z) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -11,6 +18,8 @@ var Enemy = function(x,y,z) {
     
     this.x = x;
     this.y = y;
+    
+    this.multiplier = Math.floor((Math.random() * 5) + 1);
 };
 
 // Update the enemy's position, required method for game
@@ -22,8 +31,21 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 550) {
         this.x = Math.floor(Math.random() * -1000);
 	    this.y = yVals[Math.floor(Math.random() * 6)];
+        this.multiplier = Math.floor((Math.random() * 5) + 1);
     } else {
-       this.x = this.x + 101 * dt; 
+       this.x = this.x + 101 * dt * this.multiplier; 
+    }
+    
+    if (this.y === player.y && (this.x > player.x - 20 && this.x < player.x + 20)) {
+        player.lives--;
+        $(".right").html("Lives: " + player.lives);
+        
+        
+        if (player.lives === 0) {
+            game.gameOver = true;
+        }
+        player.x = 202;
+        player.y = 640;
     }
 };
 
@@ -37,10 +59,12 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function() {
     
-    this.sprite = 'images/enemy-bug.png';
+    this.sprite = 'images/enemy-bug-pink.png';
     
     this.x = 202;
     this.y = 640;
+    
+    this.lives = 3;
     
 };
 
@@ -70,6 +94,8 @@ Player.prototype.handleInput = function(dir) {
     } else if (this.y < 0) {
         this.y = 640;
         this.x = 202;
+        score++;
+        $(".left").html("Score: " + score);
     }
     
 };
@@ -90,7 +116,7 @@ var humans = ['images/char-boy.png', 'images/char-cat-girl.png', 'images/char-ho
 
 var allEnemies = [];
 
-var yVals = [560, 480, 400, 225, 145, 60];
+var yVals = [557, 474, 391, 225, 142, 59];
 
 
 for (var i = 0; i < 17; i++) {
@@ -111,6 +137,7 @@ for (var i = 0; i < 17; i++) {
 }
 
 var player = new Player();
+var score = 0;
 
 
 // This listens for key presses and sends the keys to your
@@ -125,3 +152,5 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+var game = new Game();
