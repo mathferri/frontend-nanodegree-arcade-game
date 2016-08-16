@@ -1,8 +1,71 @@
 body {
     text-align: center;
     background-color: #85f085;
+    box-sizing: border-box;
+    max-width: 1500px;
+    margin: auto;
+    font-family: 'Press Start 2P', cursive;
 }
 
-h1 {
-    font-family: 'Press Start 2P', cursive;
+p {
+    font-family: 'Play', sans-serif;
+}
+
+h2 {
+    height: 80px;
+    padding-top: 30px;
+}
+
+.left {
+    float: left;
+    padding-left: 180px;
+}
+
+.right {
+    float: right;
+    padding-right: 210px;
+}
+.text {
+    padding: 20px;
+    font-size: 20px;
+}
+
+.container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.description {
+    width: 100%
+}
+.rules {
+    width: 100%;
+}
+
+.game {
+    width: 100%;
+}
+
+@media screen and (min-width: 1300px) {
+    
+    .rules {
+    width: 25%;
+}
+
+.game {
+    width: 50%;
+}
+    
+    .description {
+        width: 25%;
+    }   
+    
+    .text {
+        padding: 60px;
+    }
 }

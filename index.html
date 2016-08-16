@@ -5,6 +5,8 @@
     <title>Bug Cross Arcade</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Play:700" rel="stylesheet">
+    <script src="js/jquery-3.1.0.min.js"></script>
 </head>
 <body>
     
@@ -13,12 +15,28 @@
     </header>
     
     <div class="container">
-        <p></p>
+        <div class="description">
+            <h2>Please help Ms. Buggy!</h2>
+            <p class="text">Ms. Buggy is a poor little ladybug that needs to cross the street in safety so she can be with her family. <br><br>Unfortunately humans don't pay a lot of attention to little bugs like Ms. Buggy and they tend to step on them, that's why you need to guide her and avoid humans.
+            <br><br> The more you help her the more happy she'll be, if you want to know how many times you've made her happy just look at the score!</p>
+        </div>
+        
+        <div class="game">
+            <p><span class="left">score:</span>
+            <span class="right">lives:</span></p>
+            
+        <script src="js/resources.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/engine.js"></script>
+        </div>
+        <div class="rules">
+            <h2>How to Play</h2>
+         <p class="text">To play just use your keyboard arrows to control Ms. Buggy. <br><br> if she gets smashed by a human she loses a life, if she gets out of life she dies and you have to start again. <br><br> every time you get her to the other side of the street your score gets up by 1 point.</p>
+        </div>
+       
     
     </div>
     
-    <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
+    
 </body>
 </html>
