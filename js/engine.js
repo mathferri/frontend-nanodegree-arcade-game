@@ -26,7 +26,7 @@ var Engine = (function(global) {
         lastTime;
 
     canvas.width = 505;
-    canvas.height = 909;
+    canvas.height = 850;
     $(".game").append(canvas);
     
 
@@ -173,6 +173,7 @@ var Engine = (function(global) {
         });
 
         player.render();
+        heart.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -197,7 +198,8 @@ var Engine = (function(global) {
         'images/char-pink-girl.png',
         'images/char-princess-girl.png',
         'images/enemy-bug-pink.png',
-        'images/game-over.jpg'
+        'images/game-over.jpg',
+        'images/Heart.png'
     ]);
     Resources.onReady(init);
 

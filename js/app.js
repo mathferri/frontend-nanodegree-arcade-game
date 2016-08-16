@@ -19,7 +19,7 @@ var Enemy = function(x,y,z) {
     this.x = x;
     this.y = y;
     
-    this.multiplier = Math.floor((Math.random() * 5) + 1);
+    this.multiplier = Math.floor((Math.random() * 4) + 1);
 };
 
 // Update the enemy's position, required method for game
@@ -31,12 +31,12 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 550) {
         this.x = Math.floor(Math.random() * -1000);
 	    this.y = yVals[Math.floor(Math.random() * 6)];
-        this.multiplier = Math.floor((Math.random() * 5) + 1);
+        this.multiplier = Math.floor((Math.random() * 4) + 1);
     } else {
        this.x = this.x + 101 * dt * this.multiplier; 
     }
     
-    if (this.y === player.y && (this.x > player.x - 20 && this.x < player.x + 20)) {
+    if (this.y === player.y && (this.x > player.x - 40 && this.x < player.x + 40)) {
         player.lives--;
         $(".right").html("Lives: " + player.lives);
         
@@ -96,6 +96,15 @@ Player.prototype.handleInput = function(dir) {
         this.x = 202;
         score++;
         $(".left").html("Score: " + score);
+        heart.x = (Math.floor(Math.random() * 5)) * 101;
+        heart.y = yVals[Math.floor(Math.random() * 6)];
+    }
+    
+    if (this.y === heart.y && this.x === heart.x) {
+        player.lives++;
+        $(".right").html("Lives: " + player.lives);
+        heart.x = -200;
+        heart.y = -200;
     }
     
 };
@@ -109,6 +118,19 @@ Player.prototype.render = function() {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+
+var Heart = function() {
+    this.sprite = 'images/Heart.png';
+    
+    this.x = (Math.floor(Math.random() * 5)) * 101
+    this.y = yVals[Math.floor(Math.random() * 6)];
+};
+
+
+Heart.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -117,6 +139,8 @@ var humans = ['images/char-boy.png', 'images/char-cat-girl.png', 'images/char-ho
 var allEnemies = [];
 
 var yVals = [557, 474, 391, 225, 142, 59];
+
+var heart = new Heart();
 
 
 for (var i = 0; i < 17; i++) {
