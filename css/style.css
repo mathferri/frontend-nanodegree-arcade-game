@@ -1,29 +1,15 @@
+/******************** General ********************/
+
 body {
     text-align: center;
     background-color: #85f085;
     box-sizing: border-box;
     max-width: 1500px;
     margin:auto;
-    font-family: 'Press Start 2P', cursive;
+    font-family: "Press Start 2P", cursive;
 }
 
-kbd {
-    border:1px solid gray;
-    padding:1px 5px;
-    margin:0 5px;
-    font-size:1.5em;
-    text-transform:uppercase;
-    box-shadow:1px 0 1px 0 #fff, 0 2px 0 2px lightGray, 0 2px 0 3px #333;
-    border-radius:3px;
-    background:-webkit-gradient(linear, left top, right top, color-stop(0%, #ffffff), color-stop(25%, #e2e2e2));
-    background:-webkit-linear-gradient(left, #ffffff 0%, #e2e2e2 25%);
-    background:linear-gradient(left, #ffffff 0%, #e2e2e2 25%);
-}
-
-
-p {
-    font-family: 'Play', sans-serif;
-}
+/******************** Headings ********************/
 
 h1 {
     color: #e8ff37;
@@ -33,8 +19,28 @@ h1 {
 h2 {
     height: 80px;
     padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
     color: #e8ff37;
     text-shadow: 3px 3px #000;
+}
+
+/******************** Text ********************/
+
+kbd {
+    border:1px solid gray;
+    padding:1px 5px;
+    margin:0 5px;
+    font-size:1.5em;
+    text-transform:uppercase;
+    box-shadow:1px 0 1px 0 #fff, 0 2px 0 2px lightGray, 0 2px 0 3px #333;
+    border-radius:3px;
+    background:-webkit-linear-gradient(#ffffff 0%, #e2e2e2 25%);
+    background:linear-gradient(#ffffff 0%, #e2e2e2 25%);
+}
+
+p {
+    font-family: "Play", sans-serif;
 }
 
 .left {
@@ -46,10 +52,13 @@ h2 {
     float: right;
     padding-right: 210px;
 }
+
 .text {
     padding: 20px;
     font-size: 20px;
 }
+
+/******************** Display ********************/
 
 .container {
     display: -webkit-box;
@@ -69,23 +78,25 @@ h2 {
 }
 
 .game {
-    width: 100%;
+    width: 100%; 
 }
 
-@media screen and (min-width: 1300px) {
+/******************** Media queries  ********************/
+
+@media screen and (min-width: 1300px) {  
     
     .rules {
-    width: 25%;
-}
+        width: 25%;
+    }
 
-.game {
-    width: 50%;
-}
-    
+    .game {
+        width: 50%;
+    }
+
     .description {
         width: 25%;
     }   
-    
+
     .text {
         padding: 60px;
     }

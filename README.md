@@ -1,6 +1,16 @@
-frontend-nanodegree-arcade-game
-===============================
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+#BUG CROSS ARCADE GAME
+================================
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+##A Frontend Nanodegree Project
+================================
+
+###How to run the game
+================================
+
+To run the game simply open index.html with your browser _(Google Chrome is preferred)_ and follow the instructions.
+
+###How to run the game
+================================
+
+To control Ms. Buggy just use the keyboard arrows or w,a,s,d. If the player gets smashed by a human it loses a life, if it gets out of lives it dies and you have to start again. Every time you get it to the other side of the street your score gets up by 1 point. You can get more lives by getting the hearts that appear everytime you cross the street.
