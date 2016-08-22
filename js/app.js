@@ -4,7 +4,7 @@ var Game = function() {
     this.gameWin = false;
 };
 // Shows game over or game win image.
-Game.prototype.statuscheck = function(player, heart) {
+Game.prototype.statusCheck = function(player, heart) {
     if (player.y < 0) {
         // Player reached the top and thus must be restarted and score updated.
         player.y = 557;
@@ -23,7 +23,7 @@ Game.prototype.statuscheck = function(player, heart) {
         }
 };
 // Checks for collisions between the player and the enemies.
-Game.prototype.checkcollision = function(enemy, player) {
+Game.prototype.checkCollision = function(enemy, player) {
     for (var i = 0; i<enemy.length; i++) {
         if (enemy[i].y === player.y && (enemy[i].x > player.x - 40 && enemy[i].x < player.x + 40)) {
         // Subtracts a life.
@@ -125,7 +125,7 @@ Heart.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 // Checks if the player catched a heart and adds a life if so.
-Heart.prototype.iscatch = function(player) {
+Heart.prototype.isCatch = function(player) {
     if (this.y === player.y && this.x === player.x) {
         player.lives++;
         $(".lives").html("Lives: " + player.lives);

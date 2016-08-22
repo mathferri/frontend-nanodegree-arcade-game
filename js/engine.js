@@ -95,8 +95,8 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        game.statuscheck(player, heart);
-        game.checkcollision(allEnemies, player);
+        game.statusCheck(player, heart);
+        game.checkCollision(allEnemies, player);
     }
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
@@ -110,7 +110,7 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
-        heart.iscatch(player);
+        heart.isCatch(player);
     }
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
