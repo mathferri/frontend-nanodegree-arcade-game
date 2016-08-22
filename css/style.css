@@ -5,7 +5,7 @@ body {
     background-color: #85f085;
     box-sizing: border-box;
     max-width: 1500px;
-    margin:auto;
+    margin: auto;
     font-family: "Press Start 2P", cursive;
 }
 
@@ -35,26 +35,25 @@ kbd {
     text-transform:uppercase;
     box-shadow:1px 0 1px 0 #fff, 0 2px 0 2px lightGray, 0 2px 0 3px #333;
     border-radius:3px;
-    background:-webkit-linear-gradient(#ffffff 0%, #e2e2e2 25%);
-    background:linear-gradient(#ffffff 0%, #e2e2e2 25%);
+    background:-webkit-linear-gradient(#fff 0%, #e2e2e2 25%);
+    background:linear-gradient(#fff 0%, #e2e2e2 25%);
 }
 
 p {
     font-family: "Play", sans-serif;
 }
 
-.left {
+.score {
     float: left;
     padding-left: 180px;
 }
 
-.right {
+.lives {
     float: right;
     padding-right: 210px;
 }
 
 .text {
-    padding: 20px;
     font-size: 20px;
 }
 
@@ -73,6 +72,7 @@ p {
 .description {
     width: 100%
 }
+
 .rules {
     width: 100%;
 }

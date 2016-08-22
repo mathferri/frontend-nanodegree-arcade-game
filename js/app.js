@@ -3,6 +3,39 @@ var Game = function() {
     this.gameOver = false;
     this.gameWin = false;
 };
+// Shows game over or game win image.
+Game.prototype.statuscheck = function(player, heart) {
+    if (player.y < 0) {
+        // Player reached the top and thus must be restarted and score updated.
+        player.y = 557;
+        player.x = 202;
+        score++;
+        // Updates html with actual score.
+        $(".score").html("Score: " + score);
+        heart.x = (Math.floor(Math.random() * 5)) * 101;
+        heart.y = yVals[Math.floor(Math.random() * 6)];
+        // Renders gameWin image.
+        game.gameWin = true;
+    }
+    // Shows game over if lives get to 0.
+    if (player.lives === 0) {
+            game.gameOver = true;
+        }
+};
+// Checks for collisions between the player and the enemies.
+Game.prototype.checkcollision = function(enemy, player) {
+    for (var i = 0; i<enemy.length; i++) {
+        if (enemy[i].y === player.y && (enemy[i].x > player.x - 40 && enemy[i].x < player.x + 40)) {
+        // Subtracts a life.
+        player.lives--;
+        // Update life score.
+        $(".lives").html("Lives: " + player.lives);
+        // Resets player after each collision.
+        player.x = 202;
+        player.y = 557;
+        } 
+    }  
+};
 // Enemies our player must avoid.
 var Enemy = function(x, y, z) {
     // Variables applied to each of our instances go here,
@@ -28,20 +61,6 @@ Enemy.prototype.update = function(dt) {
     } else {
         this.x = this.x + 101 * dt * this.multiplier;
     }
-    // Checks for collisions between the player and the enemies.
-    if (this.y === player.y && (this.x > player.x - 40 && this.x < player.x + 40)) {
-        // Subtracts a life.
-        player.lives--;
-        // Update life score.
-        $(".right").html("Lives: " + player.lives);
-        // Shows game over if lives get to 0.
-        if (player.lives === 0) {
-            game.gameOver = true;
-        }
-        // Resets player after each collision.
-        player.x = 202;
-        player.y = 640;
-    }
 };
 // Draw the enemy on the screen, required method for game.
 Enemy.prototype.render = function() {
@@ -53,21 +72,23 @@ Enemy.prototype.render = function() {
 var Player = function() {
     this.sprite = "images/char-bug-pink.png";
     this.x = 202;
-    this.y = 640;
+    this.y = 557;
     // Initial lives = 3.
     this.lives = 3;
 };
 // HandleInput method to deal with different player positions and keyboard inputs.
 Player.prototype.handleInput = function(dir) {
+    var ydir = 83;
+    var xdir = 101;
     // Change the player's position based on the user keyboard input.
     if (dir == "up") {
-        this.y = this.y - 83;
+        this.y = this.y - ydir;
     } else if (dir == "down") {
-        this.y = this.y + 83;
+        this.y = this.y + ydir;
     } else if (dir == "left") {
-        this.x = this.x - 101;
+        this.x = this.x - xdir;
     } else if (dir == "right") {
-        this.x = this.x + 101;
+        this.x = this.x + xdir;
     }
     if (this.x < 0) {
         // Player is off to the left side of the board, move the player
@@ -77,29 +98,10 @@ Player.prototype.handleInput = function(dir) {
         // Player is off to the right side of the board, move the player
         // back to the right-most square (404).
         this.x = 404;
-    } else if (this.y > 640) {
+    } else if (this.y > 557) {
         // Player is off to the bottom side of the board, move the player
         // back to the bottom of the screen.
-        this.y = 640;
-    } else if (this.y < 0) {
-        // Player reached the top and thus must be restarted and score updated.
-        this.y = 640;
-        this.x = 202;
-        score++;
-        // Updates html with actual score.
-        $(".left").html("Score: " + score);
-        heart.x = (Math.floor(Math.random() * 5)) * 101;
-        heart.y = yVals[Math.floor(Math.random() * 6)];
-        // Renders gameWin image.
-        game.gameWin = true;
-    }
-    // Checks if the player catched a heart and adds a life if so.
-    if (this.y === heart.y && this.x === heart.x) {
-        player.lives++;
-        $(".right").html("Lives: " + player.lives);
-        // Makes the heart disappear from the screen.
-        heart.x = -200;
-        heart.y = -200;
+        this.y = 557;
     }
 };
 // Update player method.
@@ -122,25 +124,38 @@ var Heart = function() {
 Heart.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+// Checks if the player catched a heart and adds a life if so.
+Heart.prototype.iscatch = function(player) {
+    if (this.y === player.y && this.x === player.x) {
+        player.lives++;
+        $(".lives").html("Lives: " + player.lives);
+        // Makes the heart disappear from the screen.
+        this.x = -200;
+        this.y = -200;
+    } 
+};
 // Now instantiate your objects.
 // Create humans array with the enemies sprites.
 var humans = ["images/char-boy.png", "images/char-cat-girl.png", "images/char-horn-girl.png", "images/char-pink-girl.png", "images/char-princess-girl.png"];
 // Array with the possible y coordinates for the enemies and hearts.
-var yVals = [557, 474, 391, 225, 142, 59];
+var yVals = [474, 391, 308, 225, 142, 59];
 // Place all enemy objects in an array called allEnemies.
 var allEnemies = [];
-for (var i = 0; i < 17; i++) {
-    // Set a starting x-position based on a random value.
-    var x = Math.floor(Math.random() * -1000);
-    // Set a starting y-position based on a random selection
-    // of the 6 possible values.
-    var y = yVals[Math.floor(Math.random() * 6)];
-    var z = Math.floor(Math.random() * 5);
-    // Create the new enemy object.
-    var enemy = new Enemy(x, y, z);
-    // Push the enemy into the array.
-    allEnemies.push(enemy);
-}
+// Initial function to create enemies.
+var createEnemies = function() {
+    for (var i = 0; i < 17; i++) {
+        // Set a starting x-position based on a random value.
+        var x = Math.floor(Math.random() * -1000);
+        // Set a starting y-position based on a random selection
+        // of the 6 possible values.
+        var y = yVals[Math.floor(Math.random() * 6)];
+        var z = Math.floor(Math.random() * 5);
+        // Create the new enemy object.
+        var enemy = new Enemy(x, y, z);
+        // Push the enemy into the array.
+        allEnemies.push(enemy);
+    }
+};
 // Place the player object in a variable called player.
 var player = new Player();
 // Place the heart object in a variable called heart.
