@@ -24,7 +24,7 @@ var Engine = (function(global) {
         ctx = canvas.getContext("2d"),
         lastTime;
     canvas.width = 505;
-    canvas.height = 835;
+    canvas.height = 755;
     // Append the canvas to the game div
     $(".game").append(canvas);
     /* This function serves as the kickoff point for the game loop itself
@@ -48,8 +48,8 @@ var Engine = (function(global) {
                 game.gameOver = false;
                 score = 0;
                 player.lives = 3;
-                $(".left").html("Score: " + score);
-                $(".right").html("Lives: " + player.lives);
+                $(".score").html("Score: " + score);
+                $(".lives").html("Lives: " + player.lives);
                 /* Divide dt by 5 so delay don't cause enemies to run faster */
                 update(dt / 5);
                 render();
@@ -87,6 +87,7 @@ var Engine = (function(global) {
      */
     function init() {
         lastTime = Date.now();
+        createEnemies();
         main();
     }
     /* This function is called by main (our game loop) and itself calls all
@@ -94,6 +95,8 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
+        game.statuscheck(player, heart);
+        game.checkcollision(allEnemies, player);
     }
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
@@ -107,6 +110,7 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+        heart.iscatch(player);
     }
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
@@ -123,13 +127,12 @@ var Engine = (function(global) {
                 "images/stone-block.png", // Row 1 of 4 of stone
                 "images/stone-block.png", // Row 2 of 4 of stone
                 "images/stone-block.png", // Row 3 of 6 of stone
-                "images/grass-block.png", // Middle row is grass
                 "images/stone-block.png", // Row 4 of 6 of stone            
                 "images/stone-block.png", // Row 5 of 6 of stone            
                 "images/stone-block.png", // Row 6 of 6 of stone
                 "images/grass-block.png" // Bottom row is grass
             ],
-            numRows = 9,
+            numRows = 8,
             numCols = 5,
             row,
             col;
